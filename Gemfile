@@ -76,3 +76,5 @@ gem 'mini_racer'
 
 #jquery
 gem 'jquery-rails'
+
+gem 'devise'
