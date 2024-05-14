@@ -4,6 +4,7 @@ services:
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: password
+      TZ: ${TZ}
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
@@ -11,6 +12,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
   web:
     build: .
+    environment:
+      TZ: ${TZ}
     command: bash -c "rm -f tmp/pids/server.pid && bundle check || bundle install && rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/docker_app

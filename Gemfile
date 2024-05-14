@@ -78,3 +78,7 @@ gem 'mini_racer'
 gem 'jquery-rails'
 
 gem 'devise'
+
+gem 'rails-i18n', '~> 7.0.0'
+
+gem 'dotenv'
