@@ -1,0 +1,13 @@
+<%= link_to "マイページへ", user_path(current_user) %>
+<%= form_with model: @user do |f| %>
+  <div class="field">
+    <%= f.label :profile_image %>
+    <%= f.file_field :profile_image %>
+  </div>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: "form-control" %>
+  <%= f.label :nickname %>
+  <%= f.text_field :nickname, class: "form-control" %>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

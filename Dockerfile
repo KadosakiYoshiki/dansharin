@@ -1,6 +1,11 @@
 FROM --platform=linux/amd64 ruby:3.2.2
 
-RUN apt-get update -qq && apt-get install -y build-essential default-mysql-client
+RUN apt-get update -qq && apt-get install -y \
+  libvips \
+  build-essential \
+  libpq-dev \
+  nodejs \
+  yarn
 
 ENV app_path /docker_app
 RUN mkdir ${app_path}

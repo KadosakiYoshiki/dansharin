@@ -1,0 +1,21 @@
+<%= link_to "ホーム", root_path %>
+<% if current_user == @user %>
+  <%= link_to "編集", edit_user_path(current_user) %>
+<% end %>
+
+<div>
+  <%= label_tag User.human_attribute_name(:profile_image) %>
+  <% if @user.profile_image.attached? && @user.profile_image_exists? %>
+    <%= image_tag @user.image_url(:thumb) %>
+  <% else %>
+    <p>No profile image available</p>
+  <% end %>
+</div>
+<div>
+  <%= label_tag User.human_attribute_name(:name) %>
+  <%= @user.name %>
+</div>
+<div>
+  <%= label_tag User.human_attribute_name(:nickname) %>
+  <%= @user.nickname %>
+</div>

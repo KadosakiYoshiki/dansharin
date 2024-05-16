@@ -1,9 +1,9 @@
-<h1>ログインアプリ</h1>
+<h1>断捨離アプリ</h1>
 
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->
 
-  <h4> メールアドレス： <%= current_user.email %> </h4>
+  <h4> メールアドレス： <%= link_to current_user.email, mypage_users_path %> </h4>
   <%= button_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
