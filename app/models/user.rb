@@ -6,10 +6,16 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  validates :name, presence: :true, length: { in: 2..64 }
+  validates :name, presence: true, length: { in: 2..64 }
+  validates :username, presence: true, length: { maximum: 16 }, uniqueness: { case_sensitive: false }, format: { with: /\w/, message: 'に使用できるのは、英数字とアンダーバーのみです。' }
   validate :acceptable_image
 
+  before_create :set_username
   #after_save :resize_profile_image, if: :profile_image_attached?
+
+  def to_param
+    username ? username : super()
+  end
 
   def profile_image_exists?
     profile_image.blob.persisted?
@@ -53,5 +59,11 @@ class User < ApplicationRecord
 
   def profile_image_attached?
     self.profile_image.attached?
+  end
+
+  def set_username
+    while self.username.blank? || User.find_by(username: self.username).present? do
+      self.username = SecureRandom.alphanumeric
+    end
   end
 end

@@ -1,13 +1,22 @@
-<%= link_to "マイページへ", user_path(current_user) %>
-<%= form_with model: @user do |f| %>
+<%= link_to "マイページへ", user_path(current_user.username), class: "btn btn-primary" %>
+<%= form_with model: @user, param: @user.username do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
     <%= f.label :profile_image %>
     <%= f.file_field :profile_image %>
   </div>
-  <%= f.label :name %>
-  <%= f.text_field :name, class: "form-control" %>
-  <%= f.label :nickname %>
-  <%= f.text_field :nickname, class: "form-control" %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :username %>
+    <%= f.text_field :username, class: "form-control", onchange: "searchUsableUsername(this.value)" %>
+  </div>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
