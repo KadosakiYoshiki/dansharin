@@ -5,11 +5,14 @@ RUN apt-get update -qq && apt-get install -y \
   build-essential \
   libpq-dev \
   nodejs \
-  yarn
+  yarn \
+  npm
 
 ENV app_path /docker_app
 RUN mkdir ${app_path}
 WORKDIR ${app_path}
+
+RUN npm i bootstrap-icons
 
 COPY ./Gemfile ${app_path}/Gemfile
 COPY ./Gemfile.lock ${app_path}/Gemfile.lock
