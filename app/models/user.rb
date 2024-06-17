@@ -7,10 +7,10 @@ class User < ApplicationRecord
   has_one_attached :profile_image
 
   validates :name, presence: true, length: { in: 2..64 }
-  validates :username, presence: true, length: { maximum: 16 }, uniqueness: { case_sensitive: false }, format: { with: /\w/, message: 'に使用できるのは、英数字とアンダーバーのみです。' }
+  validates :username, presence: true, length: { maximum: 16 }, uniqueness: { case_sensitive: false }, format: { with: /\w/, message: 'に使用できるのは、英数字とアンダーバーのみです。' }, on: :update
   validate :acceptable_image
 
-  before_create :set_username
+  before_create :set_id_username
   #after_save :resize_profile_image, if: :profile_image_attached?
 
   def to_param
@@ -61,7 +61,10 @@ class User < ApplicationRecord
     self.profile_image.attached?
   end
 
-  def set_username
+  def set_id_username
+    while self.id.blank? || User.find_by(id: self.id).present? do
+      self.id = SecureRandom.hex(16)
+    end
     while self.username.blank? || User.find_by(username: self.username).present? do
       self.username = SecureRandom.alphanumeric
     end
