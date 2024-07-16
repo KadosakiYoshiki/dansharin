@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DockerApp</title>
+    <title><%= I18n.t("title") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,7 +10,59 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="position-relative">
+    <%= render 'shared/header' %>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <% if current_user.present? && (!defined?(@post_create) || @post_create) %>
+      <div class="position-fixed" style="bottom: 60px; right: 30px;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="bi bi-plus-circle-fill" style="font-size: 4rem; color: cornflowerblue;"></i>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <% if current_user.profile_image.attached? && current_user.profile_image_exists? %>
+                  <%= image_tag current_user.image_url(:ogp) %>
+                <% else %>
+                  <i class="bi-person-fill" style="font-size: 2rem; color: cornflowerblue;"></i>
+                <% end %>
+              </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <%= form_with model: Post.new do |f| %>
+              <%= hidden_field_tag :path, request.fullpath %>
+              <div class="modal-body">
+                <div id="post_error_messages">
+                  <%= render "shared/error_messages", object: f.object %>
+                </div>
+                <%= f.text_area :content, class: "form-control", rows: 10, onkeyup: "countValueLengthContent(this.value);" %>
+                <div class="text-end" id="countValueLength">
+                  140
+                </div>
+                <div>
+                  <%= f.label :post_images, type: "button", class: "w-100" do %>
+                    <div style="height: 262px;" class="border d-flex align-items-center justify-content-center">
+                      <%= image_tag "card-image.svg", class: "bi-card-image post_images flex-shrink-1 object-fit-contain", height: 262 %>
+                    </div>
+                    <%= f.file_field :post_images, multiple: true, class: "uploader", style: 'display:none', onchange: "postImageChange();" %>
+                  <% end %>
+                  <%= button_tag type: "button", id: "postImageDeleteButton", class: "btn btn-secondary", style: "display: none;", onclick: "postImageDelete();", disabled: true do %>
+                    <i class="bi-image-fill"></i> <i class="bi-trash3-fill"></i>
+                  <% end %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <%= f.submit "投稿する", class: "btn btn-primary", id: "submitButton", disabled: true %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= render 'shared/footer' %>
   </body>
 </html>

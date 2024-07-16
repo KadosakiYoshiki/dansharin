@@ -1,5 +1,10 @@
 body {
-  padding-top: 56px;
+  @media screen and (min-width: 992px) {
+    padding-top: 86px;
+  }
+  @media screen and (max-width: 992px) {
+    padding-top: 60px;
+  }
   padding-bottom: 56px;
 }
 

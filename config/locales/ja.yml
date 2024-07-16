@@ -1,5 +1,13 @@
 ---
 ja:
+  title: 'ダンシャリン(仮)'
+  home: 'ホーム'
+  notification: '通知'
+  mypage: 'マイページ'
+  search: '検索'
+  menu: 'メニュー'
+  post: '投稿'
+  message: 'メッセージ'
   activerecord:
     errors:
       messages:
@@ -7,6 +15,17 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      user: 'ユーザー'
+    attributes:
+      user:
+        id: 'ID'
+        name: '名前'
+        nickname: 'ニックネーム'
+        username: 'ユーザーID'
+        description: '自己紹介'
+        created_at: '登録日時'
+        updated_at: '更新日時'
   date:
     abbr_day_names:
     - 日

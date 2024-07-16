@@ -7,14 +7,16 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def edit
-
+    redirect_to root_url and return unless current_user == @user
+    @post_create = false
   end
 
   def update
+    redirect_to root_url and return unless current_user == @user
     if @user.update(user_params)
       redirect_to @user, notice: 'Profile image was successfully updated.'
     else
@@ -23,8 +25,22 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    redirect_to root_url and return unless current_user == @user
     @user.destroy
     redirect_to root_url, notice: 'ご利用ありがとうございました。'
+  end
+
+  def search
+    if current_user.username == params[:username]
+      render json: { message: "OK", valid: true }
+    else
+      @user = User.find_by_username(params[:username])
+      if @user.present?
+        render json: { message: "そのユーザIDは既に使用されています。", valid: false }
+      else
+        render json: { message: "OK", valid: true }
+      end
+    end
   end
 
   private
@@ -39,6 +55,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:profile_image, :name, :nickname, :username)
+    params.require(:user).permit(:profile_image, :name, :nickname, :username, :description)
   end
 end

@@ -1,22 +1,47 @@
-<%= link_to "マイページへ", user_path(current_user.username), class: "btn btn-primary" %>
-<%= form_with model: @user, param: @user.username do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.label :profile_image %>
-    <%= f.file_field :profile_image %>
-  </div>
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :username %>
-    <%= f.text_field :username, class: "form-control", onchange: "searchUsableUsername(this.value)" %>
-  </div>
-
-  <%= f.submit class: "btn btn-primary" %>
+<%= link_to user_path(current_user.username), class: "btn btn-primary" do %>
+  <i class="bi bi-chevron-left"></i> マイページへ
 <% end %>
+<div class="col-md-6 offset-md-3">
+  <%= form_with model: @user, param: @user.username do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div>
+      <%= f.label :profile_image, type: "button" do %>
+        <% if current_user.profile_image.attached? && current_user.profile_image_exists? %>
+          <%= image_tag current_user.image_url(:ogp), class: "profile_image flex-shrink-1", style: "width: 70px; height: 70px;" %>
+        <% else %>
+          <%= image_tag "person-fill.svg", class: "bi-person-fill profile_image flex-shrink-1 object-fit-contain", width: 70, height: 70 %>
+        <% end %>
+        <%= f.file_field :profile_image, class: "uploader", style: 'display:none', onchange: "profileImageChange();" %>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :nickname %>
+      <%= f.text_field :nickname, class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :username, class: "form-label" %>
+      <div class="input-group has-validation">
+        <span class="input-group-text" id="inputGroupPrepend3">@</span>
+        <%= f.text_field :username, class: "form-control", id: "user_username", maxlength: 16, aria: { describedby: "inputGroupPrepend3" }, onkeyup: "searchUsableUsername(this.value)" %>
+      </div>
+      <div id="searchUsableUsernameResult"></div>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "form-control", rows: 10, onkeyup: "countValueLengthContent(this.value);" %>
+      <div class="text-end" id="countValueLength">
+        <% if f.object.description.nil? %>
+          140
+        <% else %>
+          <%= 140 - f.object.description.length%>
+        <% end %>
+      </div>
+    </div>
+
+    <%= f.submit class: "btn btn-primary", id: "userEditSubmitButton" %>
+  <% end %>
+</div>

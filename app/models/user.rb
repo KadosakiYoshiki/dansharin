@@ -8,10 +8,13 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { in: 2..64 }
   validates :username, presence: true, length: { maximum: 16 }, uniqueness: { case_sensitive: false }, format: { with: /\w/, message: 'に使用できるのは、英数字とアンダーバーのみです。' }, on: :update
+  validates :description, length: { maximum: 140 }
   validate :acceptable_image
 
   before_create :set_id_username
   #after_save :resize_profile_image, if: :profile_image_attached?
+
+  has_many :posts
 
   def to_param
     username ? username : super()
