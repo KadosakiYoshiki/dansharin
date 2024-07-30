@@ -1,0 +1,49 @@
+<div class="border mb-2 p-1">
+  <div class="d-flex">
+    <div class="flex-shrink-1 me-1" style="width: 70px; height: 70px;">
+      <% if post.user.profile_image.attached? && post.user.profile_image_exists? %>
+        <%= image_tag post.user.image_url(:ogp), class: "img-thumbnail img-responsive" %>
+      <% else %>
+        <i class="bi-person-fill img-thumbnail img-responsive" style="font-size: 2rem; color: cornflowerblue;" class=""></i>
+      <% end %>
+    </div>
+    <div class="w-100">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-start">
+          <div class="me-1">
+            <%= link_to user_path(post.user), class: "link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" do %>
+              <span class="fw-bold"><%= post.user.nickname %></span>
+            <% end %>
+          </div>
+          <div class="me-1">
+            @<%= post.user.username %>
+          </div>
+          <div class="me-1">
+            ・ <i class="bi-alarm"></i> <%= time_ago_in_words(post.created_at) %>
+          </div>
+        </div>
+        <% if current_user == post.user %>
+          <div class="me-1">
+            <a href="#" id="post_<%= post.id %>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi-three-dots" style="color: gray;"></i> 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="post_<%= post.id %>">
+              <%= button_to "投稿を削除", post_path(post, path: request.fullpath), method: :delete, data: { turbo_confirm: '削除しますか？' }, class: "dropdown-item" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div><%= simple_format post.content %></div>
+      <% if post.post_images.attached? %>
+        <div class="pi_img_area">
+        <% length = post.post_images.length %>
+        <% post.post_images.each.with_index(1) do |image, i| %>
+          <div class="pe-1 pb-1 pi_<%= i %>_<%= length %>" type="button" data-bs-toggle="modal" data-bs-target="#postImageModal">
+            <%= image_tag image, class: "pi_img rounded-3 object-fit-cover", onclick: "showPostImage(this);", id: "image-#{image.id}" %>
+          </div>
+        <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

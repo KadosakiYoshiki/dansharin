@@ -8,3 +8,29 @@ body {
   padding-bottom: 56px;
 }
 
+#pi_img_area, .pi_img_area {
+  aspect-ratio: 16 / 9;
+}
+
+.pi_1_1 {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+
+.pi_1_2, .pi_2_2, .pi_1_3 {
+  float: left;
+  width: 50%;
+  height: 100%;
+}
+
+.pi_2_3, .pi_3_3, .pi_1_4, .pi_2_4, .pi_3_4, .pi_4_4 {
+  float: left;
+  width: 50%;
+  height: 50%;
+}
+
+.pi_img {
+  width: 100%;
+  height: 100%;
+}

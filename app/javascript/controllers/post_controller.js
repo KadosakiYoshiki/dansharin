@@ -26,22 +26,51 @@ window.countValueLengthContent = function(value) {
 
 window.postImageChange = function() {
   const uploader = document.querySelector('.uploader');
-  const file = uploader.files[0];
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    const image = reader.result;
-    document.querySelector('.post_images').setAttribute('src', image);
+  var pi_img_area = document.getElementById('pi_img_area');
+  if (uploader.files.length <= 4) {
+    $('#pi_img_area').empty();
+    const fileList = uploader.files;
+    const files = Array.from(fileList);
+    files.map((file, i) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const image = reader.result;
+    
+        var div = document.createElement('div');
+        div.setAttribute('class', `p-1 pi_${i+1}_${uploader.files.length}`);
+    
+        // <img>要素を作成
+        var img = document.createElement('img');
+        img.setAttribute('src', image);
+        img.setAttribute('class', 'pi_img rounded-3 object-fit-cover');
+    
+        // <img>要素を<div>要素に追加
+        div.appendChild(img);
+    
+        // divをpi_img_areaに追加
+        pi_img_area.appendChild(div);
+      }
+    });
     $('#postImageDeleteButton').prop('disabled', false);
     $('#postImageDeleteButton').show();
+  } else {
+    alert('添付できるのは4枚までです');
+    postImageDelete();
   }
 }
 
 window.postImageDelete = function() {
-  if (confirm('画像を削除しますか？')) {
-    $('.uploader').val(null);
-    $('.post_images').attr('src', '/assets/card-image.svg');
-    $('#postImageDeleteButton').prop('disabled', true);
-    $('#postImageDeleteButton').hide();
-  }
+  $('.uploader').val(null);
+  $('#pi_img_area').empty();
+  var img = document.createElement('img');
+  img.setAttribute('src', '/assets/card-image.svg');
+  img.setAttribute('class', "bi-card-image pi_img object-fit-contain");
+  pi_img_area.appendChild(img);
+  $('#postImageDeleteButton').prop('disabled', true);
+  $('#postImageDeleteButton').hide();
+}
+
+window.showPostImage = function(image) {
+  document.querySelector('#post_image').setAttribute('src', image.src);
 }

@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_many_attached :post_images
 
   validates :content, presence: true
+  validates :post_images, limit: { min: 0, max: 4 }
   #validate :acceptable_image
 
   before_create :set_id

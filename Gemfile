@@ -82,3 +82,5 @@ gem 'devise'
 gem 'rails-i18n', '~> 7.0.0'
 
 gem 'dotenv'
+
+gem 'active_storage_validations'
