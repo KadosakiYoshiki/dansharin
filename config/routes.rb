@@ -14,7 +14,10 @@ Rails.application.routes.draw do
       get :search
     end
   end
-  resources :posts, only: [:new, :create, :show, :destroy]
+
+  resources :posts, only: [:new, :create, :show, :destroy] do
+    resources :reactions, only: [:create, :destroy]
+  end
 
   # Defines the root path route ("/")
   # root "posts#index"

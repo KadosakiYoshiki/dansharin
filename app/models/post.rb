@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many_attached :post_images
+  has_many :reactions, dependent: :destroy
 
   validates :content, presence: true
   validates :post_images, limit: { min: 0, max: 4 }
@@ -26,6 +27,10 @@ class Post < ApplicationRecord
               end
 
     command ? post_images.variant(command).processed : post_images
+  end
+
+  def reaction_count(emoji)
+    reactions.where(emoji: emoji).count
   end
 
   private

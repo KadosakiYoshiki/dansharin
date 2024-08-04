@@ -1,0 +1,35 @@
+<div class="d-flex flex-wrap">
+  <% Reaction::EMOJIS.each do |emoji| %>
+    <% if (rc = post.reaction_count(emoji)) > 0 %>
+      <% if (reaction = post.reactions.find_by(emoji: emoji, user_id: current_user.id)) %>
+        <%= link_to post_reaction_path(post, reaction), data: { turbo_method: :delete }, title: "#{emoji} #{rc}", class: "btn btn-primary btn-sm me-1 mb-1 rounded-pill" do %>
+          <%= emoji %> <%= rc > 99 ? '99+' : rc %>
+        <% end %>
+      <% else %>
+        <%= form_with model: Reaction.new, url: post_reactions_path(post) do |f| %>
+          <%= f.hidden_field :emoji, value: emoji %>
+          <%= f.button type: "submit", title: "#{emoji} #{rc}", class: 'btn btn-light btn-sm me-1 mb-1 rounded-pill' do %>
+            <%= emoji %> <%= rc > 99 ? '99+' : rc %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="btn-group dropend">
+    <div class="reaction-button border p-1 rounded-pill me-1 mb-1" id="post_<%= post.id %>_reaction" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+      <i class="reaction-smile bi-emoji-smile"></i> <i class="reaction-plus bi-plus"></i>
+    </div>
+    <div class="dropdown-menu" aria-labelledby="post_<%= post.id %>_reaction">
+      <div class="d-flex justify-content-start">
+        <% Reaction::EMOJIS.each do |emoji| %>
+          <%= form_with model: Reaction.new, url: post_reactions_path(post) do |f| %>
+            <%= f.hidden_field :emoji, value: emoji %>
+            <%= f.button type: "submit", class: 'btn btn-light btn-sm mx-1' do %>
+              <%= emoji %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

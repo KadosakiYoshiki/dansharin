@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    this.element.textContent = "Hello World!"
   }
 }
 
@@ -96,6 +95,7 @@ window.postImageDelete = function() {
   deleteButton.disabled = true;
   deleteButton.style.display = 'none';
 };
+
 window.showPostImage = function(image) {
   document.querySelector('#post_image').setAttribute('src', image.src);
 };

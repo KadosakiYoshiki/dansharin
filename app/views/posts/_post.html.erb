@@ -39,10 +39,13 @@
         <% length = post.post_images.length %>
         <% post.post_images.each.with_index(1) do |image, i| %>
           <div class="pe-1 pb-1 pi_<%= i %>_<%= length %>" type="button" data-bs-toggle="modal" data-bs-target="#postImageModal">
-            <%= image_tag image, class: "pi_img rounded-3 object-fit-cover", onclick: "showPostImage(this);", id: "image-#{image.id}" %>
+            <%= image_tag image, class: "pi_img rounded-3 object-fit-cover", onclick: "showPostImage(this);" %>
           </div>
         <% end %>
         </div>
+      <% end %>
+      <%= turbo_frame_tag dom_id(post, :reactions) do %>
+        <%= render "reactions/reactions", post: post %>
       <% end %>
     </div>
   </div>
