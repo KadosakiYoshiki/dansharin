@@ -52,3 +52,7 @@ body {
   top: -3px;
   right: 2px;
 }
+
+.eactions-width {
+  min-width: 33.333333%;
+}

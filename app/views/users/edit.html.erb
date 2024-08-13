@@ -1,7 +1,7 @@
 <%= link_to user_path(current_user.username), class: "btn btn-primary" do %>
   <i class="bi bi-chevron-left"></i> マイページへ
 <% end %>
-<div class="col-md-6 offset-md-3">
+<div class="col-lg-6 offset-lg-3">
   <%= form_with model: @user, param: @user.username do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div>

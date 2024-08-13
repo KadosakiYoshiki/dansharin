@@ -17,6 +17,10 @@ Rails.application.routes.draw do
 
   resources :posts, only: [:new, :create, :show, :destroy] do
     resources :reactions, only: [:create, :destroy]
+    resources :images, only: :show
+    member do
+      get :reaction_users
+    end
   end
 
   # Defines the root path route ("/")

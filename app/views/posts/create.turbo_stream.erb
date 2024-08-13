@@ -1,0 +1,8 @@
+<% if @save_flag %>
+  <%= turbo_stream_action_tag "close_modal" %>
+  <%= turbo_stream.prepend("posts", partial: "posts/post", locals: { post: @post }) %>
+  <% if @post.replied_id && @post.replied %>
+    <%= turbo_stream.update("replies_post_#{@post.replied_id}", partial: "posts/post_replies", locals: { post: @post.replied }) %>
+    <%= turbo_stream.update("reactions_post_#{@post.replied_id}", partial: "reactions/reactions", locals: { post: @post.replied }) %>
+  <% end %>
+<% end %>

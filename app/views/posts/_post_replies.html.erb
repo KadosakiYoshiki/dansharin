@@ -1,0 +1,7 @@
+<% if (rpc = post.replies_count) > 0 %>
+  <div class="border border-5"></div>
+  <div class="p-1">
+    <i class="bi-chat"></i> <%= rpc %>
+  </div>
+  <%= render partial: "post", collection: post.replies.order(created_at: :desc) %>
+<% end %>

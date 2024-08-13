@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many_attached :post_images
+  belongs_to :replied, class_name: 'Post', optional: true
+  has_many :replies, class_name: 'Post', foreign_key: 'replied_id'
   has_many :reactions, dependent: :destroy
 
   validates :content, presence: true
@@ -31,6 +33,10 @@ class Post < ApplicationRecord
 
   def reaction_count(emoji)
     reactions.where(emoji: emoji).count
+  end
+
+  def replies_count
+    replies.count
   end
 
   private

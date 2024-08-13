@@ -1,0 +1,19 @@
+<div class="d-flex flex-shrink-1 my-1" style="height: 60px;">
+  <% if user_simple.profile_image.attached? && user_simple.profile_image_exists? %>
+    <%= image_tag user_simple.image_url(:ogp), class: "img-thumbnail img-responsive me-1" %>
+  <% else %>
+    <i class="bi-person-fill img-thumbnail img-responsive" style="font-size: 2rem; color: cornflowerblue;" class="me-1"></i>
+  <% end %>
+  <div class="">
+    <div class="">
+      <div class="me-1">
+        <%= link_to user_path(user_simple), class: "link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" do %>
+          <span class="fw-bold"><%= user_simple.nickname %></span>
+        <% end %>
+      </div>
+      <div class="me-1">
+        @<%= user_simple.username %>
+      </div>
+    </div>
+  </div>
+</div>

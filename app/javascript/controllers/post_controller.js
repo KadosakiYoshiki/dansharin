@@ -1,4 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
+import { Turbo } from "@hotwired/turbo-rails"
+const { StreamActions } = Turbo
 
 export default class extends Controller {
   connect() {
@@ -99,3 +101,12 @@ window.postImageDelete = function() {
 window.showPostImage = function(image) {
   document.querySelector('#post_image').setAttribute('src', image.src);
 };
+
+StreamActions.open_modal = function(){
+  $('#commonModal').modal('show');
+}
+
+StreamActions.close_modal = function(){
+  $('#commonModal').empty();
+  $('#commonModal').modal('hide');
+}

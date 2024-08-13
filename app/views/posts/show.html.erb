@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <% if @post.replied_id.present? %>
+      <%= render "post", post: @post.replied %>
+      <div class="border border-5 mb-2"></div>
+    <% elsif @post.replied_id.present? && @post.replied.blank? %>
+      返信先の投稿は削除されました
+      <div class="border border-5 mb-2"></div>
+    <% end %>
+    <%= render "post_detail", post: @post %>
+    <%= tag.div id: dom_id(@post, :replies) do %>
+      <%= render "post_replies", post: @post %>
+    <% end %>
+  </div>
+</div>
