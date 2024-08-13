@@ -15,19 +15,6 @@
     <div class="container">
       <%= yield %>
     </div>
-    <div class="modal fade" id="postImageModal" tabindex="-2" aria-labelledby="postImageModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="postImageModalLabel"></h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <%= image_tag "card-image.svg", class: "pi_img object-fit-scale", id: "post_image" %>
-          </div>
-        </div>
-      </div>
-    </div>
     <% if current_user.present? && (!defined?(@post_create) || @post_create) %>
       <%= link_to new_post_path, data: { turbo_stream: true }, class: "position-fixed", style: "bottom: 60px; right: 30px;" do %>
         <i class="bi bi-plus-circle-fill" style="font-size: 4rem; color: cornflowerblue;"></i>
