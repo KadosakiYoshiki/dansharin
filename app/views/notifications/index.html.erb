@@ -1,0 +1,24 @@
+<div class="row" data-controller="notification">
+  <div class="col-lg-4 d-none d-lg-block">
+    <%= render "users/user", user: current_user %>
+  </div>
+  <div class="col-lg-8" data-notification-target="list">
+    <% if @notifications.length > 0 %>
+      <% @notifications.each do |notification| %>
+        <div class="<%= 'unread' unless notification.read %>">
+          <%= link_to mark_as_read_notification_path(notification), class: "text-reset text-decoration-none", data: { turbo_method: :put } do %>
+            <% if notification.notification_type == 'reply' %>
+              <%= render "posts/post", post: notification.notifiable %>
+            <% elsif notification.notification_type == 'reaction' %>
+              <%= render "posts/post_simple", reaction: notification.notifiable %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="p-1">
+        通知はまだありません。
+      </div>
+    <% end %>
+  </div>
+</div>

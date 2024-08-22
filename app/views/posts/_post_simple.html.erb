@@ -1,0 +1,31 @@
+<div class="border mb-2 p-1">
+  <% if reaction.post.present? %>
+    <div class="d-flex">
+      <div class="text-center flex-shrink-1 me-1" style="width: 70px; height: 70px;">
+        <span style="font-size: 48px;"><%= reaction.emoji %></span>
+      </div>
+      <div class="w-100">
+        <div style="height: 50px;">
+          <% if reaction.user.profile_image.attached? && reaction.user.profile_image_exists? %>
+            <%= image_tag reaction.user.image_url(:ogp), class: "img-thumbnail img-responsive", style: "height: 50px;" %>
+          <% else %>
+            <i class="bi-person-fill img-thumbnail img-responsive" style="height: 50px; font-size: 2rem; color: cornflowerblue;" class=""></i>
+          <% end %>
+        </div>
+        <%= reaction.user.nickname %> さんが <%= reaction.emoji %> しました！
+        <%= link_to post_path(reaction.post), class: "text-black-50 text-decoration-none" do %>
+          <div>
+            <%= reaction.post.content.truncate(30) %>
+            <% if (length = reaction.post.post_images.length) > 0 %>
+              [ <%= length %> 枚の画像 ]
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="p-1">
+      この投稿は削除されました
+    </div>
+  <% end %>
+</div>

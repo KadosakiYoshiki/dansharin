@@ -9,8 +9,10 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to '#', class: "nav-link" do %>
-              <i class="bi bi-bell-fill"></i>
+            <%= link_to notifications_path, class: "nav-link" do %>
+              <i class="bi bi-bell-fill position-relative" id="currentNotificationCount">
+                <%= render "notifications/notification_count", count: current_user.notifications.unread.count %>
+              </i>
             <% end %>
           </li>
           <li class="nav-item">

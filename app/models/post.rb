@@ -4,12 +4,14 @@ class Post < ApplicationRecord
   belongs_to :replied, class_name: 'Post', optional: true
   has_many :replies, class_name: 'Post', foreign_key: 'replied_id'
   has_many :reactions, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :content, presence: true
   validates :post_images, limit: { min: 0, max: 4 }
   #validate :acceptable_image
 
   before_create :set_id
+  after_create :create_notification_for_reply
   #after_save :resize_post_images, if: :post_images_attached?
 
   def post_images_exists?
@@ -68,5 +70,15 @@ class Post < ApplicationRecord
     while self.id.blank? || Post.find_by(id: self.id).present? do
       self.id = SecureRandom.hex(16)
     end
+  end
+
+  def create_notification_for_reply
+    return unless replied_id.present? && replied.user_id != self.user_id
+
+    Notification.create(
+      user: replied.user,
+      notifiable: self,
+      notification_type: 'reply'
+    )
   end
 end

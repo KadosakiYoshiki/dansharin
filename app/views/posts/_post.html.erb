@@ -10,22 +10,32 @@
       </div>
       <div class="w-100">
         <div class="d-flex justify-content-between">
-          <div class="d-flex flex-wrap">
-            <div class="me-1">
-              <%= link_to user_path(post.user), class: "link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" do %>
-                <span class="fw-bold"><%= post.user.nickname %></span>
+          <object>
+            <div class="d-flex flex-wrap">
+              <div class="me-1">
+                <%= link_to user_path(post.user), class: "link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" do %>
+                  <span class="fw-bold"><%= post.user.nickname %></span>
+                <% end %>
+              </div>
+              <div class="me-1">
+                @<%= post.user.username %>
+              </div>
+              <div class="me-1">
+                ・ <i class="bi-alarm"></i>
+                <%= link_to post_path(post), class: "text-secondary text-decoration-underline" do %>
+                  <%= time_ago_in_words(post.created_at) %>
+                <% end %>
+              </div>
+            </div>
+            <% if post.replied_id.present? %>
+              返信先:
+              <% if (rep_post = post.replied).present? %>
+                <%= link_to "@#{rep_post.user.username}", user_path(rep_post.user.username) %>
+              <% else %>
+                削除済
               <% end %>
-            </div>
-            <div class="me-1">
-              @<%= post.user.username %>
-            </div>
-            <div class="me-1">
-              ・ <i class="bi-alarm"></i>
-              <%= link_to post_path(post), class: "text-secondary text-decoration-underline" do %>
-                <%= time_ago_in_words(post.created_at) %>
-              <% end %>
-            </div>
-          </div>
+            <% end %>
+          </object>
           <% if current_user == post.user %>
             <div class="me-1">
               <a href="#" id="post_<%= post.id %>" role="button" data-bs-toggle="dropdown" aria-expanded="false">

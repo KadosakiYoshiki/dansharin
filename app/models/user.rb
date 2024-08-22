@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :reactions, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates :name, presence: true, length: { in: 2..64 }
   validates :username, presence: true, length: { maximum: 16 }, uniqueness: { case_sensitive: false }, format: { with: /\w/, message: 'に使用できるのは、英数字とアンダーバーのみです。' }, on: :update

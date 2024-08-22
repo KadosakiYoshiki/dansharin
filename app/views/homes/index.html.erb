@@ -1,6 +1,6 @@
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4 d-none d-lg-block">
       <%= render "users/user", user: current_user %>
     </div>
     <div class="col-lg-8" id="posts">
