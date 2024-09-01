@@ -1,39 +1,49 @@
-<h2>Sign up</h2>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">アカウント作成</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <div class="mb-3">
+              <%= f.label :email, "メールアドレス", class: "form-label" %>
+              <em>(パスワードの変更の時に使用します)</em>
+              <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :nickname, "ニックネーム", class: "form-label" %>
+              <%= f.text_field :nickname, class: "form-control", placeholder: 'ニックネームは2~16文字までです' %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password, "パスワード", class: "form-label" %>
+              <% if @minimum_password_length %>
+                <em>(最低 <%= @minimum_password_length %> 文字)</em>
+              <% end %>
+              <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password_confirmation, "パスワード確認", class: "form-label" %>
+              <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+            </div>
+
+            <div class="d-grid">
+              <%= f.button class: "btn btn-primary btn-lg" do %>
+                <i class="bi bi-person-vcard-fill"></i> これで登録する
+              <% end %>
+            </div>
+          <% end %>
+
+          <div class="text-center mt-3">
+            <%= render "devise/shared/links" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :nickname %><br />
-    <%= f.text_field :nickname, placeholder: 'ニックネームの入力は任意です' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

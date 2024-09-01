@@ -5,11 +5,11 @@
         <span style="font-size: 48px;"><%= reaction.emoji %></span>
       </div>
       <div class="w-100">
-        <div style="height: 50px;">
+        <div style="">
           <% if reaction.user.profile_image.attached? && reaction.user.profile_image_exists? %>
-            <%= image_tag reaction.user.image_url(:ogp), class: "img-thumbnail img-responsive", style: "height: 50px;" %>
+            <%= image_tag reaction.user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_petit" %>
           <% else %>
-            <i class="bi-person-fill img-thumbnail img-responsive" style="height: 50px; font-size: 2rem; color: cornflowerblue;" class=""></i>
+            <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_petit", style: "color: cornflowerblue;" %>
           <% end %>
         </div>
         <%= reaction.user.nickname %> さんが <%= reaction.emoji %> しました！

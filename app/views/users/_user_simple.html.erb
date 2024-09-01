@@ -1,9 +1,11 @@
 <div class="d-flex flex-shrink-1 my-1" style="height: 60px;">
-  <% if user_simple.profile_image.attached? && user_simple.profile_image_exists? %>
-    <%= image_tag user_simple.image_url(:ogp), class: "img-thumbnail img-responsive me-1" %>
-  <% else %>
-    <i class="bi-person-fill img-thumbnail img-responsive" style="font-size: 2rem; color: cornflowerblue;" class="me-1"></i>
-  <% end %>
+  <div class="me-1">
+    <% if user_simple.profile_image.attached? && user_simple.profile_image_exists? %>
+      <%= image_tag user_simple.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_mini" %>
+    <% else %>
+      <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_mini", style: "color: cornflowerblue;" %>
+    <% end %>
+  </div>
   <div class="">
     <div class="">
       <div class="me-1">

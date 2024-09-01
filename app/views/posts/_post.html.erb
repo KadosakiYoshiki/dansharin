@@ -1,14 +1,14 @@
 <div class="border mb-2 p-1 <%= post&.id %>">
   <% if post.present? %>
     <div class="d-flex">
-      <div class="flex-shrink-1 me-1" style="width: 70px; height: 70px;">
+      <div class="flex-shrink-1 me-1">
         <% if post.user.profile_image.attached? && post.user.profile_image_exists? %>
-          <%= image_tag post.user.image_url(:ogp), class: "img-thumbnail img-responsive" %>
+          <%= image_tag post.user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_middle" %>
         <% else %>
-          <i class="bi-person-fill img-thumbnail img-responsive" style="font-size: 2rem; color: cornflowerblue;" class=""></i>
+          <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_middle", style: "color: cornflowerblue;" %>
         <% end %>
       </div>
-      <div class="w-100">
+      <div class="flex-grow-1">
         <div class="d-flex justify-content-between">
           <object>
             <div class="d-flex flex-wrap">

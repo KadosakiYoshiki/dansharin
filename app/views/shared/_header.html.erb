@@ -30,9 +30,9 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
                 <% if current_user.profile_image.attached? && current_user.profile_image_exists? %>
-                  <%= image_tag current_user.image_url(:ogp), class: "", style: "width: 50px; height: 50px;" %>
+                  <%= image_tag current_user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_petit" %>
                 <% else %>
-                  <i class="bi-person-fill" style="font-size: 2rem; color: cornflowerblue; width: 70px; height: 70px;"></i>
+                  <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_petit", style: "color: cornflowerblue;" %>
                 <% end %>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -43,6 +43,14 @@
             </li>
           </ul>
         </div>
+      </div>
+    </nav>
+  <% else %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <%= link_to root_path, class: "navbar-brand" do %>
+          <i class="bi bi-trash3-fill"></i> <%= I18n.t("title") %>
+        <% end %>
       </div>
     </nav>
   <% end %>

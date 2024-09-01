@@ -1,4 +1,4 @@
-<% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
+<% if user_signed_in? %>
   <div class="row">
     <div class="col-lg-4 d-none d-lg-block">
       <%= render "users/user", user: current_user %>
@@ -8,8 +8,41 @@
     </div>
   </div>
 <% else %>
-  <!-- ユーザーがログインしていなかった時の処理 -->
-  <h2> 現在ログインしていません </h2>
-  <%= link_to "ログイン", new_user_session_path, class: 'post' %> <!-- ログイン画面に移行する -->
-  <%= link_to "新規登録", new_user_registration_path, class: 'post' %> <!-- 新規登録画面に移行する -->
+  <div class="container py-5 text-center">
+    <h1 class="display-4 fw-bold">ようこそ！<%= I18n.t("title") %>へ</h1>
+    <p class="lead mb-4">あなたの断捨離を画像付きで報告して、仲間と一緒にスッキリした生活を目指しましょう！</p>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h2 class="h5 card-title fw-bold">特徴</h2>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <i class="bi bi-camera-fill text-primary"></i>
+                <strong>画像付き報告:</strong> 断捨離を行った成果を画像でシェアし、達成感を共有しましょう。
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-emoji-smile-fill text-success"></i>
+                <strong>複数リアクション:</strong> いいねだけじゃない！様々なリアクションであなたの投稿に共感できます。
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-chat-fill text-info"></i>
+                <strong>返信機能:</strong> 投稿に対してコメントや返信をして、断捨離仲間と交流を深めましょう。
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="lead">今すぐアカウントを作成して、断捨離ライフを楽しみましょう！</p>
+        <%= link_to new_user_registration_path, class: "btn btn-primary btn-lg" do %>
+          <i class="bi bi-person-vcard-fill"></i> <%= "アカウント作成" %>
+        <% end %>
+        <hr class="my-4">
+        <p class="lead">もうアカウントを持ってますか？</p>
+        <%= link_to new_user_session_path, class: "btn btn-success btn-lg" do %>
+          <i class="bi bi-door-open-fill"></i> <%= "ログイン" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

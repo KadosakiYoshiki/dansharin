@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = @user.posts.where(replied_id: nil).order(created_at: :desc)
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def edit
@@ -55,6 +55,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:profile_image, :name, :nickname, :username, :description)
+    params.require(:user).permit(:profile_image, :nickname, :username, :description)
   end
 end

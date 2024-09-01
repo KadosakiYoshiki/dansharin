@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-between">
   <div>
     <% if user.profile_image.attached? && user.profile_image_exists? %>
-      <%= image_tag user.image_url(:ogp), class: "img-thumbnail img-responsive" %>
+      <%= image_tag user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image" %>
     <% else %>
-      <i class="bi-person-fill img-thumbnail img-responsive" style="font-size: 2rem; color: cornflowerblue;" ></i>
+      <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image", style: "color: cornflowerblue;" %>
     <% end %>
   </div>
   <div class="d-flex align-items-end">

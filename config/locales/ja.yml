@@ -20,7 +20,6 @@ ja:
     attributes:
       user:
         id: 'ID'
-        name: '名前'
         nickname: 'ニックネーム'
         username: 'ユーザーID'
         description: '自己紹介'

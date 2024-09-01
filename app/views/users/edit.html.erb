@@ -4,19 +4,15 @@
 <div class="col-lg-6 offset-lg-3">
   <%= form_with model: @user, param: @user.username do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <div>
+    <div class="">
       <%= f.label :profile_image, type: "button" do %>
         <% if current_user.profile_image.attached? && current_user.profile_image_exists? %>
           <%= image_tag current_user.image_url(:ogp), class: "profile_image flex-shrink-1", style: "width: 70px; height: 70px;" %>
         <% else %>
-          <%= image_tag "person-fill.svg", class: "bi-person-fill profile_image flex-shrink-1 object-fit-contain", width: 70, height: 70 %>
+          <%= image_tag "person-fill.svg", class: "profile_image flex-shrink-1 object-fit-contain", style: "color: cornflowerblue; width: 70px; height: 70px;" %>
         <% end %>
         <%= f.file_field :profile_image, class: "uploader", style: 'display:none', onchange: "profileImageChange();" %>
       <% end %>
-    </div>
-    <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control" %>
     </div>
     <div class="field">
       <%= f.label :nickname %>
