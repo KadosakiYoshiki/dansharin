@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :accessble_user?, only: [:edit, :update, :destroy]
-
-  def index
-    
-  end
 
   def show
     @posts = @user.posts.order(created_at: :desc).page(params[:page])
