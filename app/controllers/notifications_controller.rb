@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   def index
-    @notifications = current_user.notifications.order(created_at: :desc)
+    @notifications = current_user.notifications.order(created_at: :desc).page(params[:page])
   end
 
   def mark_as_read

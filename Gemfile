@@ -84,3 +84,6 @@ gem 'rails-i18n', '~> 7.0.0'
 gem 'dotenv'
 
 gem 'active_storage_validations'
+
+gem 'kaminari', '~> 1.2', '>= 1.2.1'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'

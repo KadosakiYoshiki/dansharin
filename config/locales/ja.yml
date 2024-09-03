@@ -199,3 +199,10 @@ ja:
       long: "%Y/%m/%d %H:%M:%S"
       short: "%m/%d %H:%M"
     pm: 午後
+  views:
+    pagination:
+      first: <i class="bi bi-chevron-bar-left"></i>
+      last: <i class="bi bi-chevron-bar-right"></i>
+      previous: <i class="bi bi-chevron-left"></i>
+      next: <i class="bi bi-chevron-right"></i>
+      truncate: "..."

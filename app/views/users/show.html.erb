@@ -2,7 +2,11 @@
   <div class="col-lg-4">
     <%= render "users/user", user: @user %>
   </div>
-  <div class="col-lg-8" id="posts">
-    <%= render partial: "posts/post", collection: @posts %>
+  <div class="col-lg-8">
+    <%= paginate @posts %>
+    <div id="posts">
+      <%= render partial: "posts/post", collection: @posts %>
+    </div>
+    <%= paginate @posts %>
   </div>
 </div>

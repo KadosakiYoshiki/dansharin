@@ -4,6 +4,7 @@
   </div>
   <div class="col-lg-8" data-notification-target="list">
     <% if @notifications.length > 0 %>
+      <%= paginate @notifications %>
       <% @notifications.each do |notification| %>
         <div class="<%= 'unread' unless notification.read %>">
           <%= link_to mark_as_read_notification_path(notification), class: "text-reset text-decoration-none", data: { turbo_method: :put } do %>
@@ -15,6 +16,7 @@
           <% end %>
         </div>
       <% end %>
+      <%= paginate @notifications %>
     <% else %>
       <div class="p-1">
         通知はまだありません。
