@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :accessble_user?, only: [:edit, :update, :destroy]
 
@@ -24,8 +24,31 @@ class UsersController < ApplicationController
 
   def destroy
     redirect_to root_url and return unless current_user == @user
-    @user.destroy
-    redirect_to root_url, notice: 'ご利用ありがとうございました。'
+
+    ActiveRecord::Base.transaction do
+      begin
+        # プロフィール画像を即座に削除
+        @user.profile_image.purge
+        
+        # ユーザーの投稿に関連する画像をすべて削除
+        @user.posts.each { |post| post.post_images.purge }
+        
+        # ユーザーを削除
+        if @user.destroy
+          flash[:notice] = "ご利用ありがとうございました。"
+        else
+          # ユーザー削除が失敗した場合にロールバック
+          raise ActiveRecord::Rollback, "ユーザーの削除に失敗しました。"
+        end
+      rescue => e
+        # エラーが発生した場合の処理
+        flash[:alert] = "削除中にエラーが発生しました: #{e.message}"
+        redirect_to edit_user_path(@user) and return
+      end
+    end
+  
+    # 正常に削除された場合、ルートURLへリダイレクト
+    redirect_to root_url
   end
 
   def search

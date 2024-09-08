@@ -67,3 +67,14 @@ function validNGMessage(result, form_area, submit_button) {
   form_area.removeClass('border-success is-valid');
   submit_button.prop("disabled", true);
 }
+
+window.doubleDeleteAccountConfirm = function() {
+  if (confirm('本当にアカウントを削除しますか？')) {
+    if (confirm("本当にいいですね？")) {
+      if (confirm("後悔しませんね？")) {
+        return true;
+      }
+    }
+  }
+  return false;  // どれかの確認でキャンセルされたら削除を実行しない
+}
