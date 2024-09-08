@@ -1,7 +1,9 @@
 <% if (rpc = post.replies_count) > 0 %>
+  <% replies = post.replies.order(created_at: :desc).page(params[:page]) %>
   <div class="border border-5"></div>
-  <div class="p-1">
-    <i class="bi-chat"></i> <%= rpc %>
+  <div class="p-1 d-flex justify-content-between">
+    <div class="me-2 align-self-center"><i class="bi-chat"></i> <%= rpc %></div>
+    <%= paginate replies %>
   </div>
-  <%= render partial: "post", collection: post.replies.order(created_at: :desc) %>
+  <%= render partial: "post", collection: replies %>
 <% end %>
