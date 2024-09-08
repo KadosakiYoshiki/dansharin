@@ -1,13 +1,19 @@
-<div class="modal-dialog modal-dialog-centered">
+<div class="modal-dialog modal-lg modal-dialog-centered">
   <div class="modal-content">
     <div class="modal-header">
-      <h1 class="modal-title fs-4" id="commonModalLabel">
+      <h1 class="modal-title fs-4 me-2" id="commonModalLabel">
         <%= @emoji %> <span class="fs-6">をした</span> <%= @rc %> <span class="fs-6">人</span>
       </h1>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
+      <% if @pagy.pages > 1 %>
+        <%= render "reactions/reaction_page" %>
+      <% end %>
       <%= render partial: "users/user_simple", collection: @users %>
+      <% if @pagy.pages > 1 %>
+        <%= render "reactions/reaction_page" %>
+      <% end %>
     </div>
   </div>
 </div>

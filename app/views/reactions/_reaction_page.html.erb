@@ -1,0 +1,16 @@
+<%= form_with method: :get, data: { turbo_stream: true } do %>
+  <div class="d-flex">
+    <%== pagy_bootstrap_nav(@pagy, anchor_string: 'data-turbo-stream="true"') %>
+    <nav class="pagy-bootstrap nav" aria-label="Pages">
+      <ul class="pagination ms-2">
+        <li class="page-item">
+          <%= number_field_tag :page, params[:page], min: 1, max: @pagy.pages, class: "form-control" %>
+          <%= hidden_field_tag :emoji, @emoji %>
+        </li>
+        <li class="page-item">
+          <%= button_tag 'Go', class: "btn btn-primary" %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+<% end %>

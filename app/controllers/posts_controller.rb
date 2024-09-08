@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   def reaction_users
     @emoji = params[:emoji]
     @rc = @post.reaction_count(@emoji)
-    @users = @post.reactions.where(emoji: @emoji).includes(:user).map(&:user)
+    @pagy, @users = pagy(User.joins(:reactions).where(reactions: { post_id: @post.id, emoji: @emoji }).order(created_at: :desc), page: params[:page])
   end
 
   private
