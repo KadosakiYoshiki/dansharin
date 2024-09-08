@@ -5,44 +5,22 @@
         <%= link_to root_path, class: "navbar-brand" do %>
           <i class="bi bi-trash3-fill"></i> <%= I18n.t("title") %>
         <% end %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <%= link_to root_path, class: "nav-link" do %>
-                <i class="bi bi-house-door-fill"></i> <%= I18n.t("home") %>
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+              <% if current_user.profile_image.attached? && current_user.profile_image_exists? %>
+                <%= image_tag current_user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_petit" %>
+              <% else %>
+                <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_petit", style: "color: cornflowerblue;" %>
               <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '#', class: "nav-link" do %>
-                <i class="bi bi-bell-fill"></i> <%= I18n.t("notification") %>
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to user_path(current_user), class: "nav-link" do %>
-                <i class="bi bi-person-fill"></i> <%= I18n.t("mypage") %>
-              <% end %>
-            </li>
-          </ul>
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
-                <% if current_user.profile_image.attached? && current_user.profile_image_exists? %>
-                  <%= image_tag current_user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_petit" %>
-                <% else %>
-                  <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_petit", style: "color: cornflowerblue;" %>
-                <% end %>
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <%= button_to "ログアウト", destroy_user_session_path, class: "dropdown-item", method: :delete %>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <%= button_to "ログアウト", destroy_user_session_path, class: "dropdown-item", method: :delete %>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </nav>
   <% else %>
