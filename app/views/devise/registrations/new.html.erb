@@ -16,7 +16,8 @@
 
             <div class="mb-3">
               <%= f.label :nickname, "ニックネーム", class: "form-label" %>
-              <%= f.text_field :nickname, class: "form-control", placeholder: 'ニックネームは2~16文字までです' %>
+              <em>(最大 16 文字)</em>
+              <%= f.text_field :nickname, class: "form-control" %>
             </div>
 
             <div class="mb-3">
