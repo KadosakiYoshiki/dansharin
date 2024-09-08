@@ -8,15 +8,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    if (@save_flag = @post.save)
-      flash[:success] = "SUCESS!"
-    else
-      flash[:alert] = "OOPS!"
-      render turbo_stream: [ turbo_stream.replace("post_error_messages",
-        partial: "shared/error_messages",
-        locals: { object: @post })
-      ]
-    end
+    @save_flag = @post.save
   end
 
   def show
@@ -24,9 +16,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    flash[:success] = "SUCESS!"
-    redirect_to params[:path] ||= root_url
+
   end
 
   def reaction_users

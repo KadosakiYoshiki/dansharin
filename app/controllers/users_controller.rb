@@ -15,9 +15,10 @@ class UsersController < ApplicationController
   def update
     redirect_to root_url and return unless current_user == @user
     if @user.update(user_params)
-      redirect_to @user, notice: 'Profile image was successfully updated.'
+      flash[:notice] = "更新しました"
+      redirect_to @user
     else
-      render :edit
+      render turbo_stream: turbo_stream.update("post_error_messages", partial: "shared/error_messages", locals: { object: @user })
     end
   end
 

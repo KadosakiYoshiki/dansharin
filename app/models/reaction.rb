@@ -4,7 +4,7 @@ class Reaction < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :emoji, presence: true
-  validates :user_id, uniqueness: { scope: [:post_id, :emoji], message: "has already reacted with this emoji" }
+  validates :user_id, uniqueness: { scope: [:post_id, :emoji], message: "既に同じリアクションを取っています" }
 
   before_create :set_id
   after_create :create_notification_for_reaction

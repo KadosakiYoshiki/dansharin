@@ -1,8 +1,13 @@
 <% if @save_flag %>
+  <% flash.now[:notice] = "投稿しました" %>
   <%= turbo_stream_action_tag "close_modal" %>
   <%= turbo_stream.prepend("posts", partial: "posts/post", locals: { post: @post }) %>
+  <%= turbo_stream.update("flash", partial: "shared/flash") %>
   <% if @post.replied_id && @post.replied %>
     <%= turbo_stream.update("replies_post_#{@post.replied_id}", partial: "posts/post_replies", locals: { post: @post.replied }) %>
     <%= turbo_stream.update("reactions_post_#{@post.replied_id}", partial: "reactions/reactions", locals: { post: @post.replied }) %>
   <% end %>
+<% else %>
+  <%= turbo_stream.update("flash", partial: "shared/flash") %>
+  <%= turbo_stream.replace("post_error_messages", partial: "shared/error_messages", locals: { object: @post }) %>
 <% end %>
