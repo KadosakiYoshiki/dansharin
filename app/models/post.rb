@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :content, presence: true
-  validates :post_images, limit: { min: 0, max: 4 }
+  validates :post_images, limit: { min: 0, max: 1 }
   #validate :acceptable_image
 
   before_create :set_id
