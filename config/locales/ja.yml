@@ -22,6 +22,8 @@ ja:
         id: 'ID'
         nickname: 'ニックネーム'
         username: 'ユーザーID'
+        password: 'パスワード'
+        email: 'メールアドレス'
         description: '自己紹介'
         created_at: '登録日時'
         updated_at: '更新日時'
