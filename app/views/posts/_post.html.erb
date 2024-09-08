@@ -1,4 +1,4 @@
-<div class="border mb-2 p-1 <%= post&.id %>">
+<div class="border my-1 p-1" id="post_<%= post&.id %>">
   <% if post.present? %>
     <div class="d-flex">
       <div class="flex-shrink-1 me-1">
@@ -42,7 +42,7 @@
                 <i class="bi-three-dots" style="color: gray;"></i> 
               </a>
               <div class="dropdown-menu" aria-labelledby="post_<%= post.id %>">
-                <%= button_to "投稿を削除", post_path(post, path: request.fullpath), method: :delete, data: { turbo_confirm: '削除しますか？' }, class: "dropdown-item" %>
+                <%= button_to "投稿を削除", post_path(post), method: :delete, data: { turbo_confirm: '削除しますか？' }, class: "dropdown-item" %>
               </div>
             </div>
           <% end %>

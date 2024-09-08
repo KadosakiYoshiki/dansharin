@@ -23,9 +23,6 @@
     <%= next_page_tag unless current_page.last? %>
     <%= last_page_tag unless current_page.last? %>
     <li>&nbsp;&nbsp;</li>
-    <li class="page-item disabled">
-      <span class="page-link">Jump to</span>
-    </li>
     <li><%= number_field_tag :page, params[:page], min: 1, max: total_pages, class: "form-control" %></li>
     <li><%= button_tag 'Go', class: "btn btn-primary", onclick: "jumpToPage();" %></li>
 </nav>
