@@ -3,9 +3,9 @@
     <div class="d-flex justify-content-between">
       <div class="d-flex flex-shrink-1 me-1" style="height: 70px;">
         <% if post.user.profile_image.attached? && post.user.profile_image_exists? %>
-          <%= image_tag post.user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_middle" %>
+          <%= image_tag post.user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_middle me-1" %>
         <% else %>
-          <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_middle", style: "color: cornflowerblue;" %>
+          <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_middle me-1" %>
         <% end %>
         <div class="">
           <div class="d-flex flex-wrap">

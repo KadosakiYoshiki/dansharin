@@ -9,9 +9,9 @@
     <div class="">
       <%= f.label :profile_image, type: "button" do %>
         <% if current_user.profile_image.attached? && current_user.profile_image_exists? %>
-          <%= image_tag current_user.image_url(:ogp), class: "profile_image flex-shrink-1", style: "width: 70px; height: 70px;" %>
+          <%= image_tag current_user.image_url(:ogp), class: "profile_image_middle flex-shrink-1" %>
         <% else %>
-          <%= image_tag "person-fill.svg", class: "profile_image flex-shrink-1 object-fit-contain", style: "color: cornflowerblue; width: 70px; height: 70px;" %>
+          <%= image_tag "person-fill.svg", class: "profile_image_middle flex-shrink-1 object-fit-contain" %>
         <% end %>
         <%= f.file_field :profile_image, class: "uploader", style: 'display:none', onchange: "profileImageChange();" %>
       <% end %>

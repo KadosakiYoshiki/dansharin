@@ -3,7 +3,7 @@
     <% if user.profile_image.attached? && user.profile_image_exists? %>
       <%= image_tag user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image" %>
     <% else %>
-      <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image", style: "color: cornflowerblue;" %>
+      <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image" %>
     <% end %>
   </div>
   <div class="d-flex align-items-end">

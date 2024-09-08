@@ -5,7 +5,7 @@
         <% if post.user.profile_image.attached? && post.user.profile_image_exists? %>
           <%= image_tag post.user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_middle" %>
         <% else %>
-          <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_middle", style: "color: cornflowerblue;" %>
+          <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_middle" %>
         <% end %>
       </div>
       <div class="flex-grow-1">

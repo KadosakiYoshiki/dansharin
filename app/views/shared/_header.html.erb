@@ -11,7 +11,7 @@
               <% if current_user.profile_image.attached? && current_user.profile_image_exists? %>
                 <%= image_tag current_user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_petit" %>
               <% else %>
-                <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_petit", style: "color: cornflowerblue;" %>
+                <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_petit" %>
               <% end %>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

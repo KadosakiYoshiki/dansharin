@@ -9,7 +9,7 @@
           <% if reaction.user.profile_image.attached? && reaction.user.profile_image_exists? %>
             <%= image_tag reaction.user.image_url(:ogp), class: "img-thumbnail object-fit-fill profile_image_petit" %>
           <% else %>
-            <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_petit", style: "color: cornflowerblue;" %>
+            <%= image_tag "person-fill.svg", class: "img-thumbnail object-fit-fill profile_image_petit" %>
           <% end %>
         </div>
         <%= reaction.user.nickname %> さんが <%= reaction.emoji %> しました！
