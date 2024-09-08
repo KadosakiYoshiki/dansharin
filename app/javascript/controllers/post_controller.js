@@ -29,8 +29,8 @@ window.postImageChange = function() {
   const uploader = document.querySelector('.uploader');
   const piImgArea = document.getElementById('pi_img_area');
 
-  if (uploader.files.length > 4) {
-    alert('添付できるのは4枚までです');
+  if (uploader.files.length > 1) {
+    alert('添付できるのは1枚までです');
     postImageDelete();
     return;
   } else if (uploader.files.length == 0) {
