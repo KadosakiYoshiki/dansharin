@@ -68,10 +68,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-group :production do
-  gem 'unicorn'
-end
-
 gem 'dartsass-sprockets'
 
 gem 'bootstrap', '~> 5.3.3'
@@ -93,5 +89,3 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 
 gem 'pagy'
-
-gem 'aws-sdk-s3'
